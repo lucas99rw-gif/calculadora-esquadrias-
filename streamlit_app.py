@@ -7,7 +7,6 @@ st.set_page_config(page_title="Calculadora de Esquadrias", page_icon="window", l
 # =========================================================================
 SENHA_CORRETA = "1122"
 
-# CONTROLE DE ACESSO POR SENHA
 if "autenticado" not in st.session_state:
     st.session_state["autenticado"] = False
 
@@ -28,7 +27,7 @@ if not st.session_state["autenticado"]:
 # O SISTEMA SO RODA SE PASSAREM DA SENHA ACIMA
 # =========================================================================
 
-st.title("Sistema Personalizado de Esquadrias v7.0")
+st.title("Sistema Personalizado de Esquadrias v7.5")
 st.subheader("Calculos Diretos de Fabrica (Valores Arredondados)")
 
 # 1. PAINEL LATERAL DE CONFIGURACAO (TIPOLOGIAS)
@@ -63,11 +62,13 @@ with st.sidebar:
         
     tipologia = st.selectbox("Selecione a Estrutura:", tipologias_disponiveis)
 
+    # Variações exclusivas por tipologia
     versao_linha = "Belissima 40"
-    if linha_principal == "Belissima / Suprema" and tipologia in ["Janela de Correr - 2 Folhas", "Janela de Correr - 3 Folhas", "Porta de Correr - 2 Folhas", "Porta de Correr - 3 Folhas", "Porta de Correr - 4 Folhas"]:
-        versao_linha = st.radio("Variacao da Linha:", ["Belissima 40", "Belissima 65"])
-    elif linha_principal == "Belissima / Suprema" and tipologia == "Janela Sanfonada / Italiana / Veneziana":
-        versao_linha = st.radio("Variacao da Linha:", ["Belissima 40", "Belissima 65"])
+    if linha_principal == "Belissima / Suprema":
+        if tipologia in ["Janela de Correr - 2 Folhas", "Janela de Correr - 3 Folhas", "Porta de Correr - 2 Folhas", "Porta de Correr - 3 Folhas", "Porta de Correr - 4 Folhas"]:
+            versao_linha = st.radio("Variacao da Linha:", ["Belissima 40", "Belissima 65"])
+        elif tipologia == "Janela Sanfonada / Italiana / Veneziana":
+            versao_linha = st.radio("Variacao da Linha:", ["Belissima 40", "Belissima 65"])
         
     var_integrada = "Simples"
     if "Integrada" in tipologia:
@@ -102,7 +103,7 @@ if st.button("⚡ Calcular Lista de Corte", type="primary"):
     titulo_obra = ""
 
     # =========================================================================
-    # MOTOR DE CALCULO - SECAO 1: LINHA BELISSIMA / SUPREMA
+    # SECAO 1: LINHA BELISSIMA / SUPREMA
     # =========================================================================
     if linha_principal == "Belissima / Suprema":
         if tipologia == "Janela de Correr - 2 Folhas":
@@ -208,137 +209,4 @@ if st.button("⚡ Calcular Lista de Corte", type="primary"):
 
         elif tipologia == "Porta Integrada - 2 Folhas":
             tubo_78 = largura - 86.0
-    # =========================================================================
-    # MOTOR DE CALCULO - SECAO 2: LINHA ROMANA (CONFORME NOVO CADERNO)
-    # =========================================================================
-    elif linha_principal == "Linha Romana":
-        
-        # --- JANELA 02 FOLHAS CORRER (ROMANA) ---
-        if tipologia == "Janela Romana - 2 Folhas":
-            larg_trilho = largura - 32.0
-            alt_marco = altura - 3.0
-            alt_folha = alt_marco - 49.0
-            larg_folha = (larg_trilho - 146.0) / 2
-            titulo_obra = "Janela Romana - 2 Folhas"
-            itens_para_tela = [
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
-                f"Marcos RO (Altura): 2 pcs de {alt_marco:.0f} mm",
-                f"Altura das Folhas RO: 4 pcs de {alt_folha:.0f} mm",
-                f"Largura da Folha RO (R/2): 4 pcs de {larg_folha:.0f} mm"
-            ]
-
-        # --- JANELA 03 FOLHAS CORRER (ROMANA) ---
-        elif tipologia == "Janela Romana - 3 Folhas":
-            larg_trilho = largura - 34.0
-            alt_marco = altura - 3.0
-            alt_folha = alt_marco - 49.0
-            larg_folha = (larg_trilho - 187.0) / 3
-            titulo_obra = "Janela Romana - 3 Folhas"
-            itens_para_tela = [
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
-                f"Marcos RO (Altura): 2 pcs de {alt_marco:.0f} mm",
-                f"Altura das Folhas RO: 6 pcs de {alt_folha:.0f} mm",
-                f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm",
-                f"Largura da Folha RO (R/3): 6 pcs de {larg_folha:.0f} mm"
-            ]
-
-        # --- JANELA ROMANA INTEGRADA 2 FOLHAS ---
-        elif tipologia == "Janela Romana Integrada - 2 Folhas":
-            tubo_78 = largura - 86.0
             larg_trilho = largura - 40.0
-            alt_marco = altura - 3.0
-            alt_folha = alt_marco - 209.0
-            larg_folha = (larg_trilho - 228.0) / 2 if var_integrada == "Dupla" else (larg_trilho - 194.0) / 2
-            titulo_obra = f"Janela Romana Integrada ({var_integrada})"
-            itens_para_tela = [
-                f"78472 (Tubo/Largura): 1 pc de {tubo_78:.0f} mm",
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
-                f"Marcos RO (Altura): 2 pcs de {alt_marco:.0f} mm",
-                f"IV013 / IV015 (Altura): {alt_marco - 184.0:.0f} mm",
-                f"MN055 + Persiana (Largura): {largura - 129.0:.0f} mm",
-                f"Altura das Folhas RO: 4 pcs de {alt_folha:.0f} mm",
-                f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm",
-                f"Largura da Folha RO (R/2): 4 pcs de {larg_folha:.0f} mm"
-            ]
-
-        # --- PORTA 03 FOLHAS CORRER (ROMANA) ---
-        elif tipologia == "Porta Romana - 3 Folhas":
-            larg_trilho = largura - 34.0
-            alt_marco = altura - 3.0
-            alt_folha = alt_marco - 49.0
-            larg_folha = (larg_trilho - 187.0) / 3
-            titulo_obra = "Porta Romana - 3 Folhas"
-            itens_para_tela = [
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
-                f"Marcos RO (Altura): 2 pcs de {alt_marco:.0f} mm",
-                f"Altura das Folhas RO: 6 pcs de {alt_folha:.0f} mm",
-                f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm",
-                f"Largura da Folha RO (R/3): 6 pcs de {larg_folha:.0f} mm"
-            ]
-
-        # --- PORTA 04 FOLHAS DE CORRER (ROMANA) ---
-        elif tipologia == "Porta Romana - 4 Folhas":
-            larg_trilho = largura - 32.0
-            alt_marco = altura - 3.0
-            alt_folha = alt_marco - 49.0
-            larg_folha = (larg_trilho - 214.0) / 4
-            titulo_obra = "Porta Romana - 4 Folhas"
-            itens_para_tela = [
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
-                f"Marcos RO (Altura): 2 pcs de {alt_marco:.0f} mm",
-                f"Altura das Folhas RO: 8 pcs de {alt_folha:.0f} mm",
-                f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm",
-                f"Largura da Folha RO (R/4): 8 pcs de {larg_folha:.0f} mm"
-            ]
-
-        # --- PORTA ROMANA INTEGRADA 2 FOLHAS ---
-        elif tipologia == "Porta Romana Integrada - 2 Folhas":
-            tubo_78 = largura - 86.0
-            larg_trilho = largura - 40.0
-            alt_marco = altura - 3.0
-            alt_folha = alt_marco - 248.0
-            larg_folha = (larg_trilho - 228.0) / 2 if var_integrada == "Dupla" else (larg_trilho - 194.0) / 2
-            titulo_obra = f"Porta Romana Integrada ({var_integrada})"
-            itens_para_tela = [
-                f"78472 (Tubo/Largura): 1 pc de {tubo_78:.0f} mm",
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
-                f"Marcos RO (Altura): 2 pcs de {alt_marco:.0f} mm",
-                f"IV013 / IV015 (Altura): {alt_marco - 220.0:.0f} mm",
-                f"MN055 + Persiana (Largura): {largura - 129.0:.0f} mm",
-                f"Altura das Folhas RO: 4 pcs de {alt_folha:.0f} mm",
-                f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm",
-                f"Largura da Folha RO (R/2): 4 pcs de {larg_folha:.0f} mm"
-            ]
-
-        # --- ADAPTACAO RECORRENTE PARA ESTRUTURAS RO DE 2 FLS TRADICIONAIS ---
-        elif tipologia == "Porta Romana - 2 Folhas":
-            larg_trilho = largura - 32.0
-            alt_marco = altura - 3.0
-            alt_folha = alt_marco - 49.0
-            larg_folha = (larg_trilho - 146.0) / 2
-            titulo_obra = "Porta Romana - 2 Folhas"
-            itens_para_tela = [
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
-                f"Marcos RO (Altura): 2 pcs de {alt_marco:.0f} mm",
-                f"Altura das Folhas RO: 4 pcs de {alt_folha:.0f} mm",
-                f"Largura da Folha RO (R/2): 4 pcs de {larg_folha:.0f} mm"
-            ]
-        elif tipologia == "Janela Romana - 4 Folhas":
-            larg_trilho = largura - 32.0
-            alt_marco = altura - 3.0
-            alt_folha = alt_marco - 49.0
-            larg_folha = (larg_trilho - 214.0) / 4
-            titulo_obra = "Janela Romana - 4 Folhas"
-            itens_para_tela = [
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
-                f"Marcos RO (Altura): 2 pcs de {alt_marco:.0f} mm",
-                f"Altura das Folhas RO: 8 pcs de {alt_folha:.0f} mm",
-                f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm",
-                f"Largura da Folha RO (R/4): 8 pcs de {larg_folha:.0f} mm"
-            ]
-
-    # EXIBICAO DOS RESULTADOS NA TELA
-    st.success(f"### Resultado do Calculo: {titulo_obra}")
-    st.markdown(f"**Cliente / Obra:** {nome_cliente} | **Pedido:** {num_pedido}")
-    for item in itens_para_tela:
-        st.markdown(f"* {item}")
