@@ -392,4 +392,4 @@ if st.button("⚡ Calcular Aluminios e Vidros", type="primary"):
                 f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm",
                 f"Largura da Folha RO (R/2): 4 pcs de {larg_folha:.0f} mm"
             ]
-            itens_vidro = [
+            itens_vidro = 
