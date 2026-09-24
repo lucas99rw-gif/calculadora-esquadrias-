@@ -27,7 +27,7 @@ if not st.session_state["autenticado"]:
 # O SISTEMA SO RODA SE PASSAREM DA SENHA ACIMA
 # =========================================================================
 
-st.title("Sistema Personalizado de Esquadrias v8.0")
+st.title("Sistema Personalizado de Esquadrias v8.2")
 st.subheader("Calculos de Aluminios & Vidros Conforme Caderno de Fabrica")
 
 # 1. PAINEL LATERAL DE CONFIGURACAO (TIPOLOGIAS)
@@ -62,7 +62,6 @@ with st.sidebar:
         
     tipologia = st.selectbox("Selecione a Estrutura:", tipologias_disponiveis)
 
-    # Variacoes baseadas nos arquivos enviados
     versao_linha = "Belissima 40"
     if linha_principal == "Belissima / Suprema":
         if tipologia in ["Janela de Correr - 2 Folhas", "Janela de Correr - 3 Folhas", "Porta de Correr - 2 Folhas", "Porta de Correr - 3 Folhas", "Porta de Correr - 4 Folhas", "Janela Sanfonada / Italiana / Veneziana"]:
@@ -146,11 +145,11 @@ if st.button("⚡ Calcular Aluminios e Vidros", type="primary"):
             tubo_78 = largura - 86.0
             larg_trilho = largura - 40.0
             alt_marco = altura - 3.0
-            alt_folha = altura - 208.0
+            alt_folha = alt_marco - 208.0
             
             if var_integrada == "Simples":
                 larg_folha = (larg_trilho - 146.0) / 2 if versao_linha == "Belissima 40" else (larg_trilho - 194.0) / 2
-            else: # Dupla
+            else:
                 larg_folha = (larg_trilho - 184.0) / 2 if versao_linha == "Belissima 40" else (larg_trilho - 230.0) / 2
                 
             titulo_obra = f"Janela Integrada Belissima ({var_integrada})"
@@ -179,7 +178,7 @@ if st.button("⚡ Calcular Aluminios e Vidros", type="primary"):
             elif tipo_giro == "Porta Dupla":
                 larg_folha = (marco_30023 - 77.0) / 2
                 qtd_folhas = 2
-            else: # Abertura para Fora
+            else:
                 larg_folha = marco_30023 - 69.0
                 qtd_folhas = 1
                 
@@ -303,7 +302,7 @@ if st.button("⚡ Calcular Aluminios e Vidros", type="primary"):
             ]
 
     # =========================================================================
-    # SECAO 2: LINHA ROMANA (CONFORME ARQUIVOS OFICIAIS)
+    # SECAO 2: LINHA ROMANA (CONFORME SEU CADERNO DE FABRICA)
     # =========================================================================
     elif linha_principal == "Linha Romana":
         
@@ -390,4 +389,3 @@ if st.button("⚡ Calcular Aluminios e Vidros", type="primary"):
             titulo_obra = "Porta Romana - 2 Folhas"
             
             itens_alum = [
-                f"Trilhos RO (Largura): 2 pcs de {larg_trilho:.0f} mm",
