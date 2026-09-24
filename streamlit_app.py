@@ -18,7 +18,7 @@ if not st.session_state["autenticado"]:
             st.error("Senha incorreta!")
     st.stop()
 
-st.title("Sistema Personalizado de Esquadrias v8.5")
+st.title("Sistema Personalizado de Esquadrias v8.6")
 st.subheader("Calculos de Aluminios & Vidros Conforme Caderno de Fabrica")
 
 # 1. PAINEL LATERAL
