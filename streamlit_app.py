@@ -118,3 +118,70 @@ if st.button("⚡ Calcular Aluminios e Vidros", type="primary"):
             titulo_obra = f"Janela Sanfonada Italiana 2 Fls ({versao_linha})"
             itens_alum = [f"Trilho: 1 pc de {larg_trilho:.0f} mm", f"Marco (Altura): 2 pcs de {alt_marco:.0f} mm", f"Porta Dobradica: 2 pcs de {alt_porta_dobradica:.0f} mm", f"SU008 (Batente): 2 pcs de {alt_su008:.0f} mm", f"Altura Folhas Gerais: 2 pcs de {alt_folhas_geral:.0f} mm", f"Largura Folhas Gerais: 2 pcs de {larg_folhas_geral:.0f} mm", f"Altura Veneziana: 4 pcs de {alt_veneziana:.0f} mm", f"Largura Veneziana R1: 4 pcs de {larg_r1:.0f} mm", f"Largura Veneziana R2: 4 pcs de {larg_r2:.0f} mm", f"VRA009: 2 pcs de {comp_vra009:.0f} mm", f"Total Palhetas VZ500: {qtd_vz500_por_folha * 4} pcs"]
             itens_vidro = ["Esta tipologia utiliza venezianas em aluminio (Palhetas VZ500)"]
+
+    elif linha_principal == "Linha Romana":
+        if tipologia == "Janela Romana - 2 Folhas":
+            larg_trilho, alt_marco = largura - 32.0, altura - 3.0
+            alt_folha = alt_marco - 49.0
+            larg_folha = (larg_trilho - 146.0) / 2
+            titulo_obra = "Janela Romana - 2 Folhas"
+            itens_alum = [f"Trilhos RO: 2 pcs de {larg_trilho:.0f} mm", f"Marcos RO: 2 pcs de {alt_marco:.0f} mm", f"Altura Folhas RO: 4 pcs de {alt_folha:.0f} mm", f"Largura Folha RO: 4 pcs de {larg_folha:.0f} mm"]
+            itens_vidro = [f"Vidro Janela Romana: 2 chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 90.0:.0f} mm"]
+        elif tipologia == "Janela Romana - 3 Folhas":
+            larg_trilho, alt_marco = largura - 34.0, altura - 3.0
+            alt_folha = alt_marco - 49.0
+            larg_folha = (larg_trilho - 187.0) / 3
+            titulo_obra = "Janela Romana - 3 Folhas"
+            itens_alum = [f"Trilhos RO: 2 pcs de {larg_trilho:.0f} mm", f"Marcos RO: 2 pcs de {alt_marco:.0f} mm", f"Altura Folhas RO: 6 pcs de {alt_folha:.0f} mm", f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm", f"Largura Folha RO: 6 pcs de {larg_folha:.0f} mm"]
+            itens_vidro = [f"Vidro Janela Romana: 3 chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 90.0:.0f} mm"]
+        elif tipologia == "Janela Romana - 4 Folhas":
+            larg_trilho, alt_marco = largura - 32.0, altura - 3.0
+            alt_folha = alt_marco - 49.0
+            larg_folha = (larg_trilho - 215.0) / 4
+            titulo_obra = "Janela Romana - 4 Folhas"
+            itens_alum = [f"Trilhos RO: 2 pcs de {larg_trilho:.0f} mm", f"Marcos RO: 2 pcs de {alt_marco:.0f} mm", f"Altura Folhas RO: 8 pcs de {alt_folha:.0f} mm", f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm", f"Largura Folha RO: 8 pcs de {larg_folha:.0f} mm"]
+            itens_vidro = [f"Vidro Janela Romana: 4 chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 90.0:.0f} mm"]
+        elif tipologia == "Janela Romana Integrada - 2 Folhas":
+            tubo_78, larg_trilho, alt_marco = largura - 86.0, largura - 40.0, altura - 3.0
+            alt_folha = alt_marco - 209.0
+            larg_folha = (larg_trilho - 228.0) / 2 if var_integrada == "Dupla" else (larg_trilho - 194.0) / 2
+            titulo_obra = f"Janela Romana Integrada ({var_integrada})"
+            itens_alum = [f"78472 (Tubo): 1 pc de {tubo_78:.0f} mm", f"Trilhos RO: 2 pcs de {larg_trilho:.0f} mm", f"Marcos RO: 2 pcs de {alt_marco:.0f} mm", f"IV013/IV015: {alt_marco - 184.0:.0f} mm", f"MN055 + Persiana: {largura - 129.0:.0f} mm", f"Altura Folhas RO: 4 pcs de {alt_folha:.0f} mm", f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm", f"Largura Folha RO: 4 pcs de {larg_folha:.0f} mm"]
+            itens_vidro = [f"Vidro Janela Romana: 2 chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 90.0:.0f} mm"]
+        elif tipologia == "Porta Romana - 2 Folhas":
+            larg_trilho, alt_marco = largura - 32.0, altura - 3.0
+            alt_folha = alt_marco - 49.0
+            larg_folha = (larg_trilho - 146.0) / 2
+            titulo_obra = "Porta Romana - 2 Folhas"
+            itens_alum = [f"Trilhos RO: 2 pcs de {larg_trilho:.0f} mm", f"Marcos RO: 2 pcs de {alt_marco:.0f} mm", f"Altura Folhas RO: 4 pcs de {alt_folha:.0f} mm", f"Largura Folha RO: 4 pcs de {larg_folha:.0f} mm"]
+            itens_vidro = [f"Vidro Porta Romana: 2 chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 176.0:.0f} mm"]
+        elif tipologia == "Porta Romana - 3 Folhas":
+            larg_trilho, alt_marco = largura - 34.0, altura - 3.0
+            alt_folha = alt_marco - 49.0
+            larg_folha = (larg_trilho - 187.0) / 3
+            titulo_obra = "Porta Romana - 3 Folhas"
+            itens_alum = [f"Trilhos RO: 2 pcs de {larg_trilho:.0f} mm", f"Marcos RO: 2 pcs de {alt_marco:.0f} mm", f"Altura Folhas RO: 6 pcs de {alt_folha:.0f} mm", f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm", f"Largura Folha RO: 3 pcs de {larg_folha:.0f} mm"]
+            itens_vidro = [f"Vidro Porta Romana: 3 chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 176.0:.0f} mm"]
+        elif tipologia == "Porta Romana - 4 Folhas":
+            larg_trilho, alt_marco = largura - 32.0, altura - 3.0
+            alt_folha = alt_marco - 49.0
+            larg_folha = (larg_trilho - 215.0) / 4
+            titulo_obra = "Porta Romana - 4 Folhas"
+            itens_alum = [f"Trilhos RO: 2 pcs de {larg_trilho:.0f} mm", f"Marcos RO: 2 pcs de {alt_marco:.0f} mm", f"Altura Folhas RO: 8 pcs de {alt_folha:.0f} mm", f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm", f"Largura Folha RO: 4 pcs de {larg_folha:.0f} mm"]
+            itens_vidro = [f"Vidro Porta Romana: 4 chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 176.0:.0f} mm"]
+        elif tipologia == "Porta Romana Integrada - 2 Folhas":
+            tubo_78, larg_trilho, alt_marco = largura - 86.0, largura - 40.0, altura - 3.0
+            alt_folha = alt_marco - 248.0
+            larg_folha = (larg_trilho - 228.0) / 2 if var_integrada == "Dupla" else (larg_trilho - 194.0) / 2
+            titulo_obra = f"Porta Romana Integrada ({var_integrada})"
+            itens_alum = [f"78472 (Tubo): 1 pc de {tubo_78:.0f} mm", f"Trilhos RO: 2 pcs de {larg_trilho:.0f} mm", f"Marcos RO: 2 pcs de {alt_marco:.0f} mm", f"IV013/IV015: {alt_marco - 220.0:.0f} mm", f"MN055 + Persiana: {largura - 129.0:.0f} mm", f"Altura Folhas RO: 4 pcs de {alt_folha:.0f} mm", f"LG028 (Batente): 2 pcs de {alt_folha + 16.0:.0f} mm", f"Largura Folha RO: 4 pcs de {larg_folha:.0f} mm"]
+            itens_vidro = [f"Vidro Porta Romana: 2 chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 176.0:.0f} mm"]
+    st.success(f"### {titulo_obra}")
+    st.markdown(f"**Cliente / Obra:** {nome_cliente} | **Pedido:** {num_pedido}")
+    col_res_alum, col_res_vidro = st.columns(2)
+    with col_res_alum:
+        st.markdown("#### 🪵 Lista de Alumínios (Corte)")
+        for item in itens_alum: st.markdown(f"* {item}")
+    with col_res_vidro:
+        st.markdown("#### 🔮 Lista de Vidros (Pedido)")
+        for item in itens_vidro: st.markdown(f"* {item}")
