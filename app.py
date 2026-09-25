@@ -18,7 +18,7 @@ if not st.session_state["autenticado"]:
             st.error("Senha incorreta!")
     st.stop()
 
-st.title("Sistema Personalizado de Esquadrias v9.0")
+st.title("Sistema Personalizado de Esquadrias v8.9")
 st.subheader("Calculos de Aluminios & Vidros Conforme Caderno de Fabrica")
 
 # 1. PAINEL LATERAL
@@ -29,7 +29,7 @@ with st.sidebar:
     if linha_principal == "Belissima / Suprema":
         tipologias = ["Janela de Correr - 2 Folhas", "Janela de Correr - 3 Folhas", "Janela Integrada - 2 Folhas", "Porta de Giro - L.30", "Porta de Correr - 2 Folhas", "Porta de Correr - 3 Folhas", "Porta de Correr - 4 Folhas", "Porta Integrada - 2 Folhas", "Janela Sanfonada / Italiana / Veneziana"]
     else:
-        tipologias = ["Janela Romana - 2 Folhas", "Janela Romana - 3 Folhas", "Janela Romana - 4 Folhas", "Janela Romana Integrada - 2 Folhas", "Porta Romana - 2 Folhas", "Porta Romana - 3 Folhas", "Porta Romana - 4 Folhas", "Porta Romana Integrada - 2 Folhas"]
+        tipologias = ["Janela Romana - 2 Folhas", "Janela Romana - 3 Folhas", "Jan Romana - 4 Folhas", "Janela Romana Integrada - 2 Folhas", "Porta Romana - 2 Folhas", "Porta Romana - 3 Folhas", "Porta Romana - 4 Folhas", "Porta Romana Integrada - 2 Folhas"]
         
     tipologia = st.selectbox("Selecione a Estrutura:", tipologias)
 
