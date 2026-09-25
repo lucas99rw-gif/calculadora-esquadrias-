@@ -76,7 +76,7 @@ if st.button("⚡ Calcular Aluminios e Vidros", type="primary"):
             else: larg_folha, qtd = marco_30023 - 69.0, 1
             titulo_obra = f"Porta de Giro L.30 ({tipo_giro})"
             itens_alum = [f"30023 (Marco Largura): 1 pc de {marco_30023:.0f} mm", f"30023 (Marco Altura): 2 pcs de {alt_30023:.0f} mm", f"30026 (Montante Altura): {qtd*2} pcs de {alt_folha:.0f} mm", f"30026 (Montante Largura): {qtd*2} pcs de {larg_folha:.0f} mm"]
-            itens_vidro = [f"Vidro Porta Giro: {qtd} chapas de {larg_folha - 6.0:.0f} mm x {alt_folha - 182.0:.0f} mm"]
+            itens_vidro = ["Esta tipologia nao utiliza vidro (Porta Cega / Alumínio)"]
         elif tipologia == "Porta de Correr - 2 Folhas":
             larg_trilho, alt_marco = largura - 32.0, altura - 3.0
             alt_folha = alt_marco - 39.0
