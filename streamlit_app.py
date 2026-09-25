@@ -24,7 +24,7 @@ if not st.session_state["autenticado"]:
     st.stop()
 
 # =========================================================================
-# O SISTEMA SÓ RODA DAQUI PARA BAIXO SE JÁ ESTIVER AUTENTICADO
+# O SISTEMA SÓ RODA SE JÁ ESTIVER AUTENTICADO
 # =========================================================================
 
 st.title("Sistema Personalizado de Esquadrias v8.8")
@@ -76,33 +76,32 @@ with st.sidebar:
     if tipologia == "Porta de Giro - L.30":
         tipo_giro = st.radio("Configuracao da Porta:", ["Folha Simples", "Porta Dupla", "Abertura para Fora"])
 
-st.markdown("---")
+# 2. ENTRADA DIRETA DE MEDIDAS E IDENTIFICACAO
+st.markdown("### Identificacao e Medidas do Vao")
+col_cli, col_num = st.columns(2)
+with col_cli:
+    nome_cliente = st.text_input("Nome do Cliente / Identificacao da Obra:", value="Geral")
+with col_num:
+    num_pedido = st.text_input("Numero do Pedido / Codigo:", value="001")
 
-# 2. FORMULARIO DE ENTRADA DE MEDIDAS (TRAVA OS DADOS NA MEMORIA)
-with st.form("formulario_calculo"):
-    st.markdown("### Identificacao e Medidas do Vao")
-    col_cli, col_num = st.columns(2)
-    with col_cli:
-        nome_cliente = st.text_input("Nome do Cliente / Identificacao da Obra:", value="Geral")
-    with col_num:
-        num_pedido = st.text_input("Numero do Pedido / Codigo:", value="001")
+col_larg, col_alt = st.columns(2)
+with col_larg:
+    largura = st.number_input("Largura (mm):", min_value=100.0, step=1.0, value=1200.0)
+with col_alt:
+    altura = st.number_input("Altura (mm):", min_value=100.0, step=1.0, value=1000.0)
 
-    col_larg, col_alt = st.columns(2)
-    with col_larg:
-        largura = st.number_input("Largura (mm):", min_value=100.0, step=1.0, value=1200.0)
-    with col_alt:
-        altura = st.number_input("Altura (mm):", min_value=100.0, step=1.0, value=1000.0)
-        
-    # O botão de disparo agora fica dentro do formulário fixo
-    botao_calcular = st.form_submit_button("⚡ Calcular Aluminios e Vidros", type="primary")
+st.divider()
 
-# 3. EXECUTAR MOTOR DE CALCULO APENAS QUANDO O FORMULARIO FOR ENVIADO
-if botao_calcular:
+# 3. BOTAO FIXO PARA ACIONAR O CALCULO
+if st.button("⚡ Calcular Aluminios e Vidros", type="primary"):
+    
     itens_alum = []
     itens_vidro = []
     titulo_obra = ""
 
-    # ==================== LINHA BELISSIMA / SUPREMA ====================
+    # =========================================================================
+    # MOTOR DE CALCULO - SECAO 1: LINHA BELISSIMA / SUPREMA
+    # =========================================================================
     if linha_principal == "Belissima / Suprema":
         if tipologia == "Janela de Correr - 2 Folhas":
             larg_trilho, alt_marco = largura - 32.0, altura - 3.0
